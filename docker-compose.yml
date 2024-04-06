@@ -116,6 +116,15 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
+  portainer:
+    image: portainer/portainer-ce:latest
+    volumes:
+      - ./data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    ports:
+      - 8100:8000
+      - 9443:9443
 
   caddy:
     image: caddy:2.7.6
