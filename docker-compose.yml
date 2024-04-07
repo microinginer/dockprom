@@ -72,7 +72,7 @@ services:
     command:
       - "--mysqld.username=exporter:exporter"
       - "--mysqld.address=10.0.0.2:3306"
-    container_name: mysqld-exporter
+    container_name: mysqldexporter
     environment:
       - DATA_SOURCE_NAME=exporter:exporter@(10.0.0.2:3306)/
     ports:
