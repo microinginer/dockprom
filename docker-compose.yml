@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.8'
 
 networks:
   monitor-net:
@@ -67,6 +67,19 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
+  mysql-exporter:
+    image: quay.io/prometheus/mysqld-exporter
+    command:
+      - "--mysqld.username=exporter:exporter"
+      - "--mysqld.address=10.0.0.2:3306"
+    container_name: mysqld-exporter
+    environment:
+      - DATA_SOURCE_NAME=exporter:exporter@(10.0.0.2:3306)/
+    ports:
+      - 9104:9104
+    volumes:
+      - ./mysql-exporter/.my.cnf:/root/.my.cnf
+
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.49.1
     container_name: cadvisor
@@ -116,6 +129,7 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
+
   portainer:
     image: portainer/portainer-ce:latest
     volumes:
