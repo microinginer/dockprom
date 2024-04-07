@@ -9,11 +9,11 @@
     reverse_proxy cadvisor:8080
 }
 
-:8080 {
+:9104 {
     basicauth /* {
         {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
     }
-    reverse_proxy cadvisor:8080
+    reverse_proxy mysqlexporter:9104
 }
 
 :9090 {
