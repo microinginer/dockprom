@@ -67,7 +67,7 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
-  mysql-exporter:
+  mysqlexporter:
     image: quay.io/prometheus/mysqld-exporter
     command:
       - "--mysqld.username=exporter:exporter"
