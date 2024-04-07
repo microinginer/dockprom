@@ -34,6 +34,12 @@ scrape_configs:
     static_configs:
       - targets: ['pushgateway:9091']
 
+  - job_name: 'nginxexporter'
+    scrape_interval: 5s
+    honor_labels: true
+    static_configs:
+      - targets: ['nginxexporter:9113']
+
 alerting:
   alertmanagers:
   - scheme: http
