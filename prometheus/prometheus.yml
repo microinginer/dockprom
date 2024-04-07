@@ -34,10 +34,6 @@ scrape_configs:
     static_configs:
       - targets: ['pushgateway:9091']
 
-  - job_name: 'mysqlexporter'
-    static_configs:
-      - targets: ['localhost:9104']
-
 alerting:
   alertmanagers:
   - scheme: http

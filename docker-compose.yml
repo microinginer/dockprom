@@ -67,19 +67,6 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
-  mysqlexporter:
-    image: quay.io/prometheus/mysqld-exporter
-    command:
-      - "--mysqld.username=exporter:exporter"
-      - "--mysqld.address=10.0.0.2:3306"
-    container_name: mysqldexporter
-    environment:
-      - DATA_SOURCE_NAME=exporter:exporter@(10.0.0.2:3306)/
-    expose:
-      - 9104
-    volumes:
-      - ./mysql-exporter/.my.cnf:/root/.my.cnf
-
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.49.1
     container_name: cadvisor
@@ -91,7 +78,7 @@ services:
       - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker:/var/lib/docker:ro
-      #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+      - /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
     restart: unless-stopped
     expose:
       - 8080
@@ -149,7 +136,6 @@ services:
       - "9090:9090"
       - "9093:9093"
       - "9091:9091"
-      - "9104:9104"
     volumes:
       - ./caddy:/etc/caddy
     environment:
