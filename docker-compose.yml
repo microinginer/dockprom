@@ -130,6 +130,21 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
+  mysqldexporter:
+    image: quay.io/prometheus/mysqld-exporter
+    command:
+      - "--mysqld.username=${MYSQL_USER:-root}:${MYSQL_PASSWORD:-}"
+      - "--mysqld.address=${MYSQL_HOST:-127.0.0.1}:${MYSQL_PORT:-3306}"
+    container_name: mysqldexporter
+    environment:
+      - DATA_SOURCE_NAME=root:@(192.168.100.246:3306)/
+    ports:
+      - 9104:9104
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
   portainer:
     image: portainer/portainer-ce:latest
     volumes:

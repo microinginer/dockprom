@@ -40,11 +40,18 @@ scrape_configs:
     static_configs:
       - targets: ['nginxexporter:9113']
 
+  - job_name: 'mysqldexporter'
+    scrape_interval: 5s
+    honor_labels: true
+    static_configs:
+      - targets: [ 'mysqldexporter:9104' ]
+
+
 alerting:
   alertmanagers:
   - scheme: http
     static_configs:
-    - targets: 
+    - targets:
       - 'alertmanager:9093'
 
 #  - job_name: 'nginx'
