@@ -15,11 +15,18 @@
     }
     reverse_proxy prometheus:9090
 }
+
 :9113 {
     basicauth /* {
         {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
     }
     reverse_proxy nginxexporter:9113
+}
+:9104 {
+    basicauth /* {
+        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
+    }
+    reverse_proxy mysqldexporter:9104
 }
 
 :9093 {
